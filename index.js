@@ -14,3 +14,6 @@ app.get('/api',(req,res)=>{
 
 app.use('/api/users',require('./routes/users'))
 app.use('/api/blog',require('./routes/blogPublish'))
+app.use('/api/like',require('./routes/blogLike'))
+app.use('/api/dislike',require('./routes/blogDislike'))
+app.use('/api/comment',require('./routes/blogComment'))

@@ -29,6 +29,7 @@ router.post('/createBlog',jwt_verify,(req,res)=>{
        author:data.author,
        date:Date.now(),
        content: data.content,
+       image: data.image,
        claps:[],
        dislikes:[],
        comment:[]

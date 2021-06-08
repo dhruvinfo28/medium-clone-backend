@@ -25,6 +25,10 @@ const blogSchema  = mongoose.Schema({
         required:true,
         type:String
     },
+    image:{
+        required:true,
+        type:String
+    },
     claps:{
         liked_by: [String],
     },
