@@ -81,6 +81,7 @@ router.post('/signup',(req,res)=>{
     // }
     
 router.post('/login',(req,res)=>{
+    console.log('Reached user login')
     const data = req.body;
     if(data.user_email && data.user_password){
         User.findOne({user_email:data.user_email})
