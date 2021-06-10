@@ -19,8 +19,13 @@ router.get('/:blogId',jwt_verify,(req,res)=>{
         }
     })
     .then(response2=>{
-        response2.dislikes.liked_by.push(user_email);
-        return response2.save();
+
+        if(response2.dislikes.liked_by.indexOf(user_email) === -1){
+            response2.dislikes.liked_by.push(user_email);
+            return response2.save();
+        }else{
+            res.status(409).json({message:'Already liked'})
+        }
     })
     .then(resp=>{
         res.status(200).json({message:'Successfully disliked'})

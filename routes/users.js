@@ -5,6 +5,7 @@ const jwt = require('jsonwebtoken')
 
 const User = require('../models/user');
 const mongoose = require('mongoose');
+const jwt_verify = require('../middlewares/jwt_verify')
 
 const router = express.Router();
 
@@ -120,5 +121,15 @@ router.post('/login',(req,res)=>{
 })
 
 
+router.get('/getLoggedInUser',jwt_verify,(req,res)=>{
+    User.findOne({_id:req.user_id}).select('user_email user_name first_name last_name')
+    .then((result)=>{
+        res.status(200).json(result)
+    })
+    .catch(err=>{
+        console.log(err);
+        res.status(500).json({message:'Internal server error'});
+    })
+})
 
 module.exports = router;
