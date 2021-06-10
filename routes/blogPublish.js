@@ -57,7 +57,7 @@ router.post('/createBlog',jwt_verify,(req,res)=>{
 router.patch('/updateBlog/:blogId',jwt_verify,(req,res)=>{
     const data = req.body;
     if(data){
-        Blog.findOneAndUpdate({_id:req.params.blogId},data,{new:true})
+        Blog.findOneAndUpdate({_id:req.params.blogId,user_id:req.user_id},data,{new:true})
         .then(response=>{
            res.status(200).json(response);
         })
@@ -70,7 +70,8 @@ router.patch('/updateBlog/:blogId',jwt_verify,(req,res)=>{
 
 //Delete blog of a particular user
 router.delete('/deleteBlog/:blogId',jwt_verify,(req,res)=>{
-    Blog.deleteOne({_id:req.params.blogId})
+    console.log('Delete a blog')
+    Blog.deleteOne({_id:req.params.blogId,user_id:req.user_id})
     .then(response=>{
         res.status(200).json({message:'Blog successfully deleted'});
     })
